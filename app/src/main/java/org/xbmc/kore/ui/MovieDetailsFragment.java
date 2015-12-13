@@ -439,49 +439,53 @@ public class MovieDetailsFragment extends AbstractDetailsFragment
                     public void onClick(DialogInterface dialog, int which) { }
                 };
 
-        // Check if the directory exists and whether to overwrite it
-        File file = new File(movieDownloadInfo.getAbsoluteFilePath());
-        if (file.exists()) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle(R.string.download)
-                    .setMessage(R.string.download_file_exists)
-                    .setPositiveButton(R.string.overwrite,
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    FileDownloadHelper.downloadFiles(getActivity(), getHostInfo(),
-                                            movieDownloadInfo, FileDownloadHelper.OVERWRITE_FILES,
-                                            callbackHandler);
-                                }
-                            })
-                    .setNeutralButton(R.string.download_with_new_name,
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    FileDownloadHelper.downloadFiles(getActivity(), getHostInfo(),
-                                            movieDownloadInfo, FileDownloadHelper.DOWNLOAD_WITH_NEW_NAME,
-                                            callbackHandler);
-                                }
-                            })
-                    .setNegativeButton(android.R.string.cancel, noopClickListener)
-                    .show();
-        } else {
-            // Confirm that the user really wants to download the file
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle(R.string.download)
-                    .setMessage(R.string.confirm_movie_download)
-                    .setPositiveButton(android.R.string.ok,
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    FileDownloadHelper.downloadFiles(getActivity(), getHostInfo(),
-                                            movieDownloadInfo, FileDownloadHelper.OVERWRITE_FILES,
-                                            callbackHandler);
-                                }
-                            })
-                    .setNegativeButton(android.R.string.cancel, noopClickListener)
-                    .show();
-        }
+        // Generate an Intent
+	FileDownloadHelper.viewFiles(getActivity(), getHostInfo(), movieDownloadInfo,  callbackHandler);
+
+
+        // check if the directory exists and whether to overwrite it
+//        File file = new File(movieDownloadInfo.getAbsoluteFilePath());
+//        if (file.exists()) {
+//            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//            builder.setTitle(R.string.download)
+//                    .setMessage(R.string.download_file_exists)
+//                    .setPositiveButton(R.string.overwrite,
+//                            new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                    FileDownloadHelper.downloadFiles(getActivity(), getHostInfo(),
+//                                            movieDownloadInfo, FileDownloadHelper.OVERWRITE_FILES,
+//                                            callbackHandler);
+//                                }
+//                            })
+//                    .setNeutralButton(R.string.download_with_new_name,
+//                            new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                    FileDownloadHelper.downloadFiles(getActivity(), getHostInfo(),
+//                                            movieDownloadInfo, FileDownloadHelper.DOWNLOAD_WITH_NEW_NAME,
+//                                            callbackHandler);
+//                                }
+//                            })
+//                    .setNegativeButton(android.R.string.cancel, noopClickListener)
+//                    .show();
+//        } else {
+//            // Confirm that the user really wants to download the file
+//            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//            builder.setTitle(R.string.download)
+//                    .setMessage(R.string.confirm_movie_download)
+//                    .setPositiveButton(android.R.string.ok,
+//                            new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                    FileDownloadHelper.downloadFiles(getActivity(), getHostInfo(),
+//                                            movieDownloadInfo, FileDownloadHelper.OVERWRITE_FILES,
+//                                            callbackHandler);
+//                                }
+//                            })
+//                    .setNegativeButton(android.R.string.cancel, noopClickListener)
+//                    .show();
+//        }
     }
 
     /**
