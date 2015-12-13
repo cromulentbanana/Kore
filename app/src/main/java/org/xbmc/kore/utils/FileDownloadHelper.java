@@ -23,6 +23,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Base64;
+import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
 import org.xbmc.kore.R;
@@ -384,7 +385,7 @@ public class FileDownloadHelper {
             public void onSuccess(FilesType.PrepareDownloadReturnType result) {
 
                 Uri uri = Uri.parse(hostInfo.getHttpURL() + "/" + result.path);
-		Toast.makeText(uri);
+		Toast.makeText(context, uri.toString(), Toast.LENGTH_SHORT).show();
 
 //                DownloadManager.Request request = new DownloadManager.Request(uri);
 //                // http basic authorization
@@ -403,7 +404,20 @@ public class FileDownloadHelper {
 //                        mediaInfo.getRelativeFilePath());
 //                downloadManager.enqueue(request);
 
+		/*
+		 * TODO: More info on including basic auth into an intent:
+		 * https://stackoverflow.com/questions/27769447/android-intent-action-view-basic-authenticaion
+		 */
 		Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+		MimeTypeMap mime_map = MimeTypeMap.getSingleton();
+		if( mime_map != null ) {
+		    String extension = getFilenameExtension(mediaInfo.getDownloadFileName());
+		    if ( extension != null ) {
+			String mime = mime_map.getMimeTypeFromExtension(extension.substring(1));
+			intent.setType(mime);
+			Toast.makeText(context, mime, Toast.LENGTH_SHORT).show();
+		    }
+		}
 		context.startActivity(intent);
 
             }
