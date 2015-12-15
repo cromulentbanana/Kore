@@ -385,7 +385,7 @@ public class FileDownloadHelper {
             public void onSuccess(FilesType.PrepareDownloadReturnType result) {
 
                 Uri uri = Uri.parse(hostInfo.getHttpURL() + "/" + result.path);
-		Toast.makeText(context, uri.toString(), Toast.LENGTH_SHORT).show();
+                LogUtils.LOGD(TAG, "Creating URI: " + uri);
 
 //                DownloadManager.Request request = new DownloadManager.Request(uri);
 //                // http basic authorization
@@ -411,13 +411,15 @@ public class FileDownloadHelper {
 		Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 		MimeTypeMap mime_map = MimeTypeMap.getSingleton();
 		if( mime_map != null ) {
-		    String extension = getFilenameExtension(mediaInfo.getDownloadFileName());
-		    if ( extension != null ) {
-			String mime = mime_map.getMimeTypeFromExtension(extension.substring(1));
-			intent.setType(mime);
-			Toast.makeText(context, mime, Toast.LENGTH_SHORT).show();
-		    }
-		}
+            String extension = getFilenameExtension(mediaInfo.getDownloadFileName());
+            if (extension != null) {
+                String mime = mime_map.getMimeTypeFromExtension(extension.substring(1));
+
+                //intent.setType("video/h264");
+                //Toast.makeText(context, intent.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }
+                LogUtils.LOGD(TAG, "Starting Intent: " + intent);
 		context.startActivity(intent);
 
             }
