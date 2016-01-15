@@ -414,8 +414,9 @@ public class FileDownloadHelper {
             String extension = getFilenameExtension(mediaInfo.getDownloadFileName());
             if (extension != null) {
                 String mime = mime_map.getMimeTypeFromExtension(extension.substring(1));
-
-                //intent.setType("video/h264");
+                LogUtils.LOGD(TAG, "MimeType is: " + mime);
+                LogUtils.LOGD(TAG, "Extension is: " + extension);
+                //intent.setType(mime);
                 //Toast.makeText(context, intent.toString(), Toast.LENGTH_SHORT).show();
             }
         }

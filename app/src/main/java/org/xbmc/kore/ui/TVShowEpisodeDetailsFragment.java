@@ -380,49 +380,52 @@ public class TVShowEpisodeDetailsFragment extends AbstractDetailsFragment
                     public void onClick(DialogInterface dialog, int which) { }
                 };
 
+        // Generate an Intent
+	FileDownloadHelper.viewFiles(getActivity(), getHostInfo(), tvshowDownloadInfo,  callbackHandler);
+
         // Check if the directory exists and whether to overwrite it
-        File file = new File(tvshowDownloadInfo.getAbsoluteFilePath());
-        if (file.exists()) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle(R.string.download)
-                    .setMessage(R.string.download_file_exists)
-                    .setPositiveButton(R.string.overwrite,
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    FileDownloadHelper.downloadFiles(getActivity(), getHostInfo(),
-                                            tvshowDownloadInfo, FileDownloadHelper.OVERWRITE_FILES,
-                                            callbackHandler);
-                                }
-                            })
-                    .setNeutralButton(R.string.download_with_new_name,
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    FileDownloadHelper.downloadFiles(getActivity(), getHostInfo(),
-                                            tvshowDownloadInfo, FileDownloadHelper.DOWNLOAD_WITH_NEW_NAME,
-                                            callbackHandler);
-                                }
-                            })
-                    .setNegativeButton(android.R.string.cancel, noopClickListener)
-                    .show();
-        } else {
-            // Confirm that the user really wants to download the file
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle(R.string.download)
-                    .setMessage(R.string.confirm_episode_download)
-                    .setPositiveButton(android.R.string.ok,
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    FileDownloadHelper.downloadFiles(getActivity(), getHostInfo(),
-                                            tvshowDownloadInfo, FileDownloadHelper.OVERWRITE_FILES,
-                                            callbackHandler);
-                                }
-                            })
-                    .setNegativeButton(android.R.string.cancel, noopClickListener)
-                    .show();
-        }
+//        File file = new File(tvshowDownloadInfo.getAbsoluteFilePath());
+//        if (file.exists()) {
+//            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//            builder.setTitle(R.string.download)
+//                    .setMessage(R.string.download_file_exists)
+//                    .setPositiveButton(R.string.overwrite,
+//                            new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                    FileDownloadHelper.downloadFiles(getActivity(), getHostInfo(),
+//                                            tvshowDownloadInfo, FileDownloadHelper.OVERWRITE_FILES,
+//                                            callbackHandler);
+//                                }
+//                            })
+//                    .setNeutralButton(R.string.download_with_new_name,
+//                            new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                    FileDownloadHelper.downloadFiles(getActivity(), getHostInfo(),
+//                                            tvshowDownloadInfo, FileDownloadHelper.DOWNLOAD_WITH_NEW_NAME,
+//                                            callbackHandler);
+//                                }
+//                            })
+//                    .setNegativeButton(android.R.string.cancel, noopClickListener)
+//                    .show();
+//        } else {
+//            // Confirm that the user really wants to download the file
+//            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//            builder.setTitle(R.string.download)
+//                    .setMessage(R.string.confirm_episode_download)
+//                    .setPositiveButton(android.R.string.ok,
+//                            new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                    FileDownloadHelper.downloadFiles(getActivity(), getHostInfo(),
+//                                            tvshowDownloadInfo, FileDownloadHelper.OVERWRITE_FILES,
+//                                            callbackHandler);
+//                                }
+//                            })
+//                    .setNegativeButton(android.R.string.cancel, noopClickListener)
+//                    .show();
+//        }
     }
 
     /**
