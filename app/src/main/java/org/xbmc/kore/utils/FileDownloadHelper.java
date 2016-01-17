@@ -416,7 +416,7 @@ public class FileDownloadHelper {
                 String mime = mime_map.getMimeTypeFromExtension(extension.substring(1));
                 LogUtils.LOGD(TAG, "MimeType is: " + mime);
                 LogUtils.LOGD(TAG, "Extension is: " + extension);
-                //intent.setType(mime);
+                intent.setDataAndType(uri, mime);
                 //Toast.makeText(context, intent.toString(), Toast.LENGTH_SHORT).show();
             }
         }
